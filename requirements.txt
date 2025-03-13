@@ -1,0 +1,4 @@
+requests>=2.28.0
+fastmcp>=0.1.0
+jupyter>=1.0.0
+notebook>=6.4.0 
