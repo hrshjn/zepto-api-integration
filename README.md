@@ -1,86 +1,68 @@
 # Zepto API Integration
 
-This repository contains tools for interacting with the Zepto API using Python. It's built using the FastMCP framework to create a structured API client.
+A Python integration with Zepto's API using FastMCP for building automation tools.
 
-## Features
+## Overview
+
+This project provides a set of tools to interact with Zepto's API, allowing you to:
 
 - Request OTP for authentication
-- Verify OTP and obtain access tokens
+- Verify OTP and get authentication tokens
 - Refresh authentication tokens
 - Retrieve order history
 
-## Project Structure
+## Installation
 
+1. Clone this repository:
+```bash
+git clone https://github.com/hrshjn/zepto-api-integration.git
+cd zepto-api-integration
 ```
-mcp/
-  └── zepto/
-      ├── server.py       # Main API integration code
-      └── zepto_test.ipynb # Jupyter notebook for testing
+
+2. Install the required dependencies:
+```bash
+pip install -r requirements.txt
 ```
 
-## Getting Started
+## Usage
 
-### Prerequisites
+### Authentication
 
-- Python 3.6+
-- Required packages: `requests`, `fastmcp`
+The authentication flow involves two steps:
 
-### Installation
+1. Request an OTP:
+```python
+from mcp.zepto.server import request_otp
 
-1. Clone this repository
-2. Install the required packages:
-   ```
-   pip install requests fastmcp
-   ```
+# Replace with your actual phone number
+result = request_otp("your_phone_number")
+print(result)
+```
 
-### Usage
+2. Verify the OTP:
+```python
+from mcp.zepto.server import verify_otp
 
-To run the server:
+# Replace with your actual phone number and the OTP you received
+result = verify_otp("your_phone_number", "your_otp")
+print(result)
+```
+
+### Testing
+
+To test the API integration:
 
 ```bash
 python mcp/zepto/server.py
 ```
 
-To test the API in a Jupyter notebook:
+**Note:** The code uses a placeholder phone number (`1234567890`) for testing. Replace it with your actual phone number when testing the functionality.
 
-```bash
-cd mcp/zepto
-jupyter notebook zepto_test.ipynb
-```
+## Security Note
 
-## API Functions
-
-### Request OTP
-
-```python
-request_otp(mobile_number: str) -> dict
-```
-
-Sends an OTP to the provided mobile number.
-
-### Verify OTP
-
-```python
-verify_otp(mobile_number: str, otp: str) -> dict
-```
-
-Verifies the OTP and returns authentication tokens.
-
-### Refresh Token
-
-```python
-refresh_zepto_token() -> dict
-```
-
-Refreshes the authentication token when it expires.
-
-### Get Orders
-
-```python
-get_orders() -> dict
-```
-
-Retrieves the order history from Zepto.
+- Never commit your actual phone number or authentication tokens to the repository
+- The placeholder phone number in the code is for demonstration purposes only
+- Always use environment variables or secure configuration files to store sensitive information
 
 ## License
 
